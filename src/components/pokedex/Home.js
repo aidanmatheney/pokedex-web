@@ -1,0 +1,79 @@
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components/macro';
+
+import SearchField from './SearchField';
+import PokemonList from './PokemonList';
+import HomePageNav from './HomePageNav';
+
+import PokemonService from '../../services/PokemonService';
+
+const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  background: green;
+
+  padding: 1rem;
+
+  height: calc(100vh - 2rem);
+`;
+
+const SearchContainer = styled.div`
+  margin-bottom: 1rem;
+
+  & > * {
+    width: 100%;
+  }
+`;
+
+const PokemonListContainer = styled.div`
+  flex-grow: 1;
+
+  overflow-y: auto;
+`;
+
+const NavContainer = styled.div`
+  margin-top: 1rem;
+
+  /* display: flex; */
+`;
+
+const pokemonService = new PokemonService();
+
+const PokedexHome = props => {
+  const [search, setSearch] = useState('');
+
+  const [pokemons, setPokemons] = useState([]);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const totalPages = 3;
+
+  useEffect(() => {
+    pokemonService.getPokemonsAsync(search).then(pokemons => {
+      setPokemons(pokemons);
+      console.log(pokemons);
+    }).catch(console.error);
+  }, [search]);
+
+  const handleNavigateToPreviousPage = () => setCurrentPage(currentPage => currentPage - 1);
+  const handleNavigateToNextPage = () => setCurrentPage(currentPage => currentPage + 1);
+
+
+  return (
+    <MainContainer>
+      <SearchContainer>
+        <SearchField value={search} onValueChange={setSearch} />
+      </SearchContainer>
+
+      <PokemonListContainer>
+        <PokemonList pokemons={pokemons} />
+      </PokemonListContainer>
+
+      <NavContainer>
+        <HomePageNav previousPageAvailable={currentPage !== 0} nextPageAvailable={currentPage !== totalPages - 1} onNavigateToPreviousPage={handleNavigateToPreviousPage} onNavigateToNextPage={handleNavigateToNextPage} />
+      </NavContainer>
+    </MainContainer>
+  );
+};
+
+export default PokedexHome;
