@@ -8,7 +8,8 @@
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-scripts": "3.1.2",
-    "styled-components": "^4.4.0"
+    "styled-components": "^4.4.0",
+    "use-debounce": "^3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,5 +31,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aidanmatheney/pokedex-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aidanmatheney/pokedex-web/issues"
+  },
+  "homepage": "https://github.com/aidanmatheney/pokedex-web#readme"
 }

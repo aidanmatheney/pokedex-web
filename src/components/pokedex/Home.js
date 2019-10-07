@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 
+import { useDebouncedCallback } from 'use-debounce';
+
 import SearchField from './SearchField';
 import PokemonList from './PokemonList';
 import HomePageNav from './HomePageNav';
@@ -35,13 +37,15 @@ const PokemonListContainer = styled.div`
 const NavContainer = styled.div`
   margin-top: 1rem;
 
-  /* display: flex; */
+/* display: flex; */
 `;
 
 const pokemonService = new PokemonService();
 
-const PokedexHome = props => {
-  const [search, setSearch] = useState('');
+const Home = () => {
+  const [enteredSearch, setEnteredSearch] = useState('');
+  const [displayedSearch, setDisplayedSearch] = useState('');
+  const [setDisplayedSearchDebounced] = useDebouncedCallback(setDisplayedSearch, 200);
 
   const [pokemons, setPokemons] = useState([]);
 
@@ -49,20 +53,26 @@ const PokedexHome = props => {
   const totalPages = 3;
 
   useEffect(() => {
-    pokemonService.getPokemonsAsync(search).then(pokemons => {
-      setPokemons(pokemons);
-      console.log(pokemons);
-    }).catch(console.error);
-  }, [search]);
+    pokemonService.getPokemonsAsync(displayedSearch)
+      .then(pokemons => {
+        console.log(pokemons);
+        setPokemons(pokemons);
+      })
+      .catch(console.error);
+  }, [displayedSearch]); // Debounce subsequent
 
   const handleNavigateToPreviousPage = () => setCurrentPage(currentPage => currentPage - 1);
   const handleNavigateToNextPage = () => setCurrentPage(currentPage => currentPage + 1);
 
+  const handleSearchFieldValueChange = newEnteredSearch => {
+    setEnteredSearch(newEnteredSearch);
+    setDisplayedSearchDebounced(newEnteredSearch);
+  };
 
   return (
     <MainContainer>
       <SearchContainer>
-        <SearchField value={search} onValueChange={setSearch} />
+        <SearchField value={enteredSearch} onValueChange={handleSearchFieldValueChange} />
       </SearchContainer>
 
       <PokemonListContainer>
@@ -76,4 +86,4 @@ const PokedexHome = props => {
   );
 };
 
-export default PokedexHome;
+export default Home;

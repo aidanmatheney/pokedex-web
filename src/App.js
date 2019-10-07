@@ -2,13 +2,13 @@ import React from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
-import PokedexHome from './components/pokedex/Home'
+import Home from './components/pokedex/Home'
 
 const App = () => {
 
 
   return (
-    <PokedexHome />
+    <Home />
 
     // <div className="App">
     //   <header className="App-header">
