@@ -17,7 +17,7 @@ const MainContainer = styled.div`
 
   padding: 1rem;
 
-  height: calc(100vh - 2rem);
+  height: 100%;
 `;
 
 const SearchContainer = styled.div`
@@ -36,8 +36,6 @@ const PokemonListContainer = styled.div`
 
 const NavContainer = styled.div`
   margin-top: 1rem;
-
-/* display: flex; */
 `;
 
 const pokemonService = new PokemonService();
