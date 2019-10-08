@@ -1,40 +1,34 @@
 import React from 'react';
 import styled from 'styled-components/macro';
 
-const CardContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
 
   background: white;
+  border-radius: 4px;
 `;
 
-const TitleContainer = styled.div`
+const CardTitle = styled.div`
   font-weight: bold;
+  text-align: center;
+
   padding: 1em;
-
-  /* display: flex;
-  flex-direction: column; */
-  /* align-content: center; */
-  /* justify-content: center; */
-
   border-bottom: 1px solid black;
 `;
 
-
-const ImageContainer = styled.div`
-  flex-grow: 1;
+const CardImg = styled.img`
+  object-fit: contain;
 `;
 
 const PokemonCard = ({ pokemon }) => (
-  <CardContainer>
-    <TitleContainer>
+  <Container>
+    <CardTitle>
       {pokemon.name}
-    </TitleContainer>
+    </CardTitle>
 
-    <ImageContainer>
-      <img src={pokemon.image} alt={pokemon.name} />
-    </ImageContainer>
-  </CardContainer>
+    <CardImg src={pokemon.image} alt={pokemon.name} />
+  </Container>
 );
 
 export default PokemonCard;
