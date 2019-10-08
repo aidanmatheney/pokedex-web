@@ -78,7 +78,7 @@ const Home = () => {
       </PokemonListContainer>
 
       <NavContainer>
-        <HomePageNav previousPageAvailable={currentPage !== 0} nextPageAvailable={currentPage !== totalPages - 1} onNavigateToPreviousPage={handleNavigateToPreviousPage} onNavigateToNextPage={handleNavigateToNextPage} />
+        <HomePageNav isPreviousPageAvailable={currentPage !== 0} isNextPageAvailable={currentPage !== totalPages - 1} onNavigateToPreviousPage={handleNavigateToPreviousPage} onNavigateToNextPage={handleNavigateToNextPage} />
       </NavContainer>
     </MainContainer>
   );
