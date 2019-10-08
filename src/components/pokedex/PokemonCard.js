@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ const CardImg = styled.img`
 const PokemonCard = ({ pokemon }) => (
   <Container>
     <CardTitle>
-      {pokemon.name}
+      <Link to={`/pokemon/${pokemon.id}`}>{pokemon.name}</Link>
     </CardTitle>
 
     <CardImg src={pokemon.image} alt={pokemon.name} />
